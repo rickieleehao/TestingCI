@@ -1,6 +1,6 @@
 [![Java CI with Maven](https://github.com/rickieleehao/TestingCI/actions/workflows/maven.yml/badge.svg)](https://github.com/rickieleehao/TestingCI/actions/workflows/maven.yml)
 
-[VIEW THE REPORT](https://mihajlonesic.github.io/junit-report-gh/)
+[VIEW THE REPORT](https://rickieleehao.github.io/TestingCI/)
 
 
 <div align="center">
