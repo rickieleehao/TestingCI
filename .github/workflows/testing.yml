@@ -29,5 +29,5 @@ jobs:
     - name: Deploy to pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-          BRANCH: reports
-          FOLDER: reports/testing-reports
+          BRANCH: main
+          FOLDER: report
