@@ -43,5 +43,6 @@
 	            <version>2.22.2</version>
 	        </plugin>
 	    </plugins>
+		<finalName>simple_java_calculator</finalName>
 	</build>
 </project>
