@@ -11,9 +11,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-- uses: devmasx/coverage-check-action@v1.2.0
-  with:
-    type: lcov
-    result_path: report/coverage.lcov
-    min_coverage: 70
-    token: ${{ github.token }}
+    steps:
+    - uses: devmasx/coverage-check-action@v1.2.0
+      with:
+        type: lcov
+        result_path: report/coverage.lcov
+        min_coverage: 70
+        token: ${{ github.token }}
