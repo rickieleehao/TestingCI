@@ -30,3 +30,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
           BRANCH: report
+          FOLDER: target/jacoco-reports
