@@ -13,7 +13,6 @@
  * @modweb      http://www.achinthagunasekara.com
  * @modemail    contact@achinthagunasekara.com
  */
- 
 
 package simplejavacalculator;
 
