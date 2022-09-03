@@ -42,7 +42,6 @@
 	            <artifactId>maven-failsafe-plugin</artifactId>
 	            <version>2.22.2</version>
 	        </plugin>
-<<<<<<< HEAD
 			<plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -67,8 +66,6 @@
                     </execution>
                 </executions>
             </plugin>
-=======
->>>>>>> parent of e480f3d (Deploying to main from  @ d43d29fe582a6b68db4cb30672e637a2e96048ef 🚀)
 	    </plugins>
 		<finalName>simple_java_calculator</finalName>
 	</build>
