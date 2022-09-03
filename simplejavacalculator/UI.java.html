@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Simple-Java-Calculator</a> &gt; <a href="index.source.html" class="el_package">simplejavacalculator</a> &gt; <span class="el_source">UI.java</span></div><h1>UI.java</h1><pre class="source lang-java linenums">/**
+ * @name        Simple Java Calculator
+ * @package     ph.calculator
+ * @file        UI.java
+ * @author      SORIA Pierre-Henry
+ * @email       pierrehs@hotmail.com
+ * @link        http://github.com/pH-7
+ * @copyright   Copyright Pierre-Henry SORIA, All Rights Reserved.
+ * @license     Apache (http://www.apache.org/licenses/LICENSE-2.0)
+ * @create      2012-03-30
+ *
+ * @modifiedby  Achintha Gunasekara
+ * @modifiedby  Kydon Chantzaridis
+ * @modweb      http://www.achinthagunasekara.com
+ * @modemail    contact@achinthagunasekara.com
+ * @modemail    kchantza@csd.auth.gr
+ */
+
+package simplejavacalculator;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+
+import java.awt.Image;
+import javax.swing.ImageIcon; 
+import java.io.*;
+
+public class UI implements ActionListener {
+   
+   private final JFrame frame;
+   
+   private final JPanel panel;
+   private final JPanel panelSub1;
+   private final JPanel panelSub2;
+   private final JPanel panelSub3;
+   private final JPanel panelSub4;
+   private final JPanel panelSub5;
+   private final JPanel panelSub6;
+   private final JPanel panelSub7;
+   private final JPanel panelSub8;
+   
+   private final JTextArea text;
+   private final JButton but[], butAdd, butMinus, butMultiply, butDivide,
+      butEqual, butCancel, butSquareRoot, butSquare, butOneDividedBy,
+      butCos, butSin, butTan, butxpowerofy, butlog, butrate, butabs, butBinary;
+   private final Calculator calc;
+   
+<span class="nc" id="L57">   private final String[] buttonValue = {&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;,</span>
+      &quot;7&quot;, &quot;8&quot;, &quot;9&quot;};
+   
+   private final Font font;
+   private final Font textFont;
+   private ImageIcon image;
+   private BufferedImageCustom imageReturn;
+   
+<span class="nc" id="L65">   public UI() throws IOException {</span>
+<span class="nc" id="L66">      frame = new JFrame(&quot;Calculator PH&quot;);</span>
+      
+<span class="nc" id="L68">      imageReturn = new BufferedImageCustom();</span>
+<span class="nc" id="L69">      image = new ImageIcon(imageReturn.imageReturn());      </span>
+      
+<span class="nc" id="L71">      panel = new JPanel();</span>
+<span class="nc" id="L72">      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));</span>
+<span class="nc" id="L73">      panelSub1 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L74">      panelSub2 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L75">      panelSub3 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L76">      panelSub4 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L77">      panelSub5 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L78">      panelSub6 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L79">      panelSub7 = new JPanel(new FlowLayout());</span>
+<span class="nc" id="L80">      panelSub8 = new JPanel(new FlowLayout());</span>
+      
+<span class="nc" id="L82">      font = new Font(&quot;Consolas&quot;,Font.PLAIN, 18);</span>
+      
+<span class="nc" id="L84">      text = new JTextArea(1, 30);</span>
+      
+<span class="nc" id="L86">      textFont = new Font(&quot;Consolas&quot;,Font.BOLD, 24);</span>
+      
+<span class="nc" id="L88">      but = new JButton[10];      </span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">      for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc" id="L90">    		 but[i] = new JButton(String.valueOf(i));</span>
+      }      
+<span class="nc" id="L92">      butAdd = new JButton(&quot;+&quot;);      </span>
+<span class="nc" id="L93">      butMinus = new JButton(&quot;-&quot;);      </span>
+<span class="nc" id="L94">      butMultiply = new JButton(&quot;*&quot;);      </span>
+<span class="nc" id="L95">      butDivide = new JButton(&quot;/&quot;);      </span>
+<span class="nc" id="L96">      butEqual = new JButton(&quot;=&quot;);      </span>
+<span class="nc" id="L97">      butSquareRoot = new JButton(&quot;sqrt&quot;);      </span>
+<span class="nc" id="L98">      butSquare = new JButton(&quot;x*x&quot;);      </span>
+<span class="nc" id="L99">      butOneDividedBy = new JButton(&quot;1/x&quot;);      </span>
+<span class="nc" id="L100">      butCos = new JButton(&quot;Cos&quot;);      </span>
+<span class="nc" id="L101">      butSin = new JButton(&quot;Sin&quot;);      </span>
+<span class="nc" id="L102">      butTan = new JButton(&quot;Tan&quot;);      </span>
+<span class="nc" id="L103">      butxpowerofy = new JButton(&quot;x^y&quot;);      </span>
+<span class="nc" id="L104">      butlog = new JButton(&quot;log10(x)&quot;);      </span>
+<span class="nc" id="L105">      butrate = new JButton(&quot;x%&quot;);      </span>
+<span class="nc" id="L106">      butabs = new JButton(&quot;abs(x)&quot;);      </span>
+<span class="nc" id="L107">      butCancel = new JButton(&quot;C&quot;);      </span>
+<span class="nc" id="L108">      butBinary = new JButton(&quot;Bin&quot;);      </span>
+      
+<span class="nc" id="L110">      calc = new Calculator();</span>
+      
+<span class="nc" id="L112">   }</span>
+   
+   public void init() {      
+<span class="nc" id="L115">      frame.setSize(450, 450);</span>
+<span class="nc" id="L116">      frame.setLocationRelativeTo(null); </span>
+<span class="nc" id="L117">      frame.setResizable(false);</span>
+<span class="nc" id="L118">      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L119">      frame.setIconImage(image.getImage());</span>
+      
+<span class="nc" id="L121">      text.setFont(textFont);</span>
+<span class="nc" id="L122">      text.setEditable(false);</span>
+      
+<span class="nc bnc" id="L124" title="All 2 branches missed.">      for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc" id="L125">         but[i].setFont(font);</span>
+      }      
+<span class="nc" id="L127">      butAdd.setFont(font);</span>
+<span class="nc" id="L128">      butMinus.setFont(font);</span>
+<span class="nc" id="L129">      butMultiply.setFont(font);</span>
+<span class="nc" id="L130">      butDivide.setFont(font);</span>
+<span class="nc" id="L131">      butEqual.setFont(font);</span>
+<span class="nc" id="L132">      butSquareRoot.setFont(font);</span>
+<span class="nc" id="L133">      butSquare.setFont(font);</span>
+<span class="nc" id="L134">      butOneDividedBy.setFont(font);</span>
+<span class="nc" id="L135">      butCos.setFont(font);</span>
+<span class="nc" id="L136">      butSin.setFont(font);</span>
+<span class="nc" id="L137">      butTan.setFont(font);</span>
+<span class="nc" id="L138">      butxpowerofy.setFont(font);</span>
+<span class="nc" id="L139">      butlog.setFont(font);</span>
+<span class="nc" id="L140">      butrate.setFont(font);</span>
+<span class="nc" id="L141">      butabs.setFont(font);</span>
+<span class="nc" id="L142">      butCancel.setFont(font);</span>
+<span class="nc" id="L143">      butBinary.setFont(font); </span>
+      
+<span class="nc" id="L145">      panel.add(Box.createHorizontalStrut(100));</span>
+<span class="nc" id="L146">      panelSub1.add(text);</span>
+<span class="nc" id="L147">      panel.add(panelSub1);</span>
+      
+<span class="nc" id="L149">      panelSub2.add(but[1]);</span>
+<span class="nc" id="L150">      panelSub2.add(but[2]);</span>
+<span class="nc" id="L151">      panelSub2.add(but[3]);</span>
+<span class="nc" id="L152">      panelSub2.add(Box.createHorizontalStrut(15));</span>
+<span class="nc" id="L153">      panelSub2.add(butAdd);</span>
+<span class="nc" id="L154">      panelSub2.add(butMinus);</span>
+<span class="nc" id="L155">      panel.add(panelSub2);</span>
+      
+<span class="nc" id="L157">      panelSub3.add(but[4]);</span>
+<span class="nc" id="L158">      panelSub3.add(but[5]);</span>
+<span class="nc" id="L159">      panelSub3.add(but[6]);</span>
+<span class="nc" id="L160">      panelSub3.add(Box.createHorizontalStrut(15));</span>
+<span class="nc" id="L161">      panelSub3.add(butMultiply);</span>
+<span class="nc" id="L162">      panelSub3.add(butDivide);      </span>
+<span class="nc" id="L163">      panel.add(panelSub3);</span>
+      
+<span class="nc" id="L165">      panelSub4.add(but[7]);</span>
+<span class="nc" id="L166">      panelSub4.add(but[8]);</span>
+<span class="nc" id="L167">      panelSub4.add(but[9]);</span>
+<span class="nc" id="L168">      panelSub4.add(Box.createHorizontalStrut(15));</span>
+<span class="nc" id="L169">      panelSub4.add(butEqual);</span>
+<span class="nc" id="L170">      panelSub4.add(butCancel);</span>
+<span class="nc" id="L171">      panel.add(panelSub4);</span>
+      
+<span class="nc" id="L173">      panelSub5.add(Box.createHorizontalStrut(92));</span>
+<span class="nc" id="L174">      panelSub5.add(but[0]);</span>
+<span class="nc" id="L175">      panelSub5.add(Box.createHorizontalStrut(210));</span>
+<span class="nc" id="L176">      panel.add(panelSub5);</span>
+      
+<span class="nc" id="L178">      panelSub6.add(butSquare);</span>
+<span class="nc" id="L179">      panelSub6.add(butSquareRoot);</span>
+<span class="nc" id="L180">      panelSub6.add(butOneDividedBy);</span>
+<span class="nc" id="L181">      panelSub6.add(butxpowerofy);</span>
+<span class="nc" id="L182">      panel.add(panelSub6);</span>
+      
+<span class="nc" id="L184">      panelSub7.add(butCos);</span>
+<span class="nc" id="L185">      panelSub7.add(butSin);</span>
+<span class="nc" id="L186">      panelSub7.add(butTan);</span>
+<span class="nc" id="L187">      panel.add(panelSub7);</span>
+      
+<span class="nc" id="L189">      panelSub8.add(butlog);</span>
+<span class="nc" id="L190">      panelSub8.add(butrate);</span>
+<span class="nc" id="L191">      panelSub8.add(butabs);</span>
+<span class="nc" id="L192">      panelSub8.add(butBinary);</span>
+<span class="nc" id="L193">      panel.add(panelSub8);</span>
+      
+<span class="nc bnc" id="L195" title="All 2 branches missed.">      for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc" id="L196">         but[i].addActionListener(this);</span>
+      }      
+<span class="nc" id="L198">      butAdd.addActionListener(this);</span>
+<span class="nc" id="L199">      butMinus.addActionListener(this);</span>
+<span class="nc" id="L200">      butMultiply.addActionListener(this);</span>
+<span class="nc" id="L201">      butDivide.addActionListener(this);</span>
+<span class="nc" id="L202">      butSquare.addActionListener(this);</span>
+<span class="nc" id="L203">      butSquareRoot.addActionListener(this);</span>
+<span class="nc" id="L204">      butOneDividedBy.addActionListener(this);</span>
+<span class="nc" id="L205">      butCos.addActionListener(this);</span>
+<span class="nc" id="L206">      butSin.addActionListener(this);</span>
+<span class="nc" id="L207">      butTan.addActionListener(this);</span>
+<span class="nc" id="L208">      butxpowerofy.addActionListener(this);</span>
+<span class="nc" id="L209">      butlog.addActionListener(this);</span>
+<span class="nc" id="L210">      butrate.addActionListener(this);</span>
+<span class="nc" id="L211">      butabs.addActionListener(this);</span>
+<span class="nc" id="L212">      butBinary.addActionListener(this);</span>
+      
+<span class="nc" id="L214">      butEqual.addActionListener(this);</span>
+<span class="nc" id="L215">      butCancel.addActionListener(this);</span>
+      
+<span class="nc" id="L217">      frame.add(panel);</span>
+<span class="nc" id="L218">      frame.setVisible(true);</span>
+<span class="nc" id="L219">   }</span>
+   
+   @Override
+   public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L223">      final Object source = e.getSource();</span>
+<span class="nc" id="L224">      Double checkNum = null;</span>
+
+<span class="nc bnc" id="L226" title="All 2 branches missed.">      for (int i = 0; i &lt; 10; i++) {</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">         if (source == but[i]) {</span>
+<span class="nc" id="L228">            text.replaceSelection(buttonValue[i]);</span>
+<span class="nc" id="L229">            return;</span>
+         }
+      }
+
+      try {
+<span class="nc" id="L234">         checkNum = Double.parseDouble(text.getText());</span>
+<span class="nc" id="L235">      } catch(NumberFormatException k) {</span>
+
+<span class="nc" id="L237">      }</span>
+
+<span class="nc bnc" id="L239" title="All 4 branches missed.">      if (checkNum != null || source == butCancel) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">         if (source == butAdd) {</span>
+<span class="nc" id="L241">            writer(calc.calculateBi(Calculator.BiOperatorModes.add, reader()));</span>
+<span class="nc" id="L242">            text.replaceSelection(butAdd.getText());</span>
+         }
+
+<span class="nc bnc" id="L245" title="All 2 branches missed.">         if (source == butMinus) {</span>
+<span class="nc" id="L246">            writer(calc.calculateBi(Calculator.BiOperatorModes.minus, reader()));</span>
+<span class="nc" id="L247">            text.replaceSelection(butMinus.getText());</span>
+         }
+
+<span class="nc bnc" id="L250" title="All 2 branches missed.">         if (source == butMultiply) {</span>
+<span class="nc" id="L251">            writer(calc.calculateBi(Calculator.BiOperatorModes.multiply, reader()));</span>
+<span class="nc" id="L252">            text.replaceSelection(butMultiply.getText());</span>
+         }
+
+<span class="nc bnc" id="L255" title="All 2 branches missed.">         if (source == butDivide) {</span>
+<span class="nc" id="L256">            writer(calc.calculateBi(Calculator.BiOperatorModes.divide, reader()));</span>
+<span class="nc" id="L257">            text.replaceSelection(butDivide.getText());</span>
+         }
+         
+<span class="nc bnc" id="L260" title="All 2 branches missed.">         if (source == butxpowerofy) {</span>
+<span class="nc" id="L261">            writer(calc.calculateBi(Calculator.BiOperatorModes.xpowerofy, reader()));</span>
+         }
+
+<span class="nc bnc" id="L264" title="All 2 branches missed.">         if (source == butSquare) {</span>
+<span class="nc" id="L265">            writer(calc.calculateMono(Calculator.MonoOperatorModes.square, reader()));</span>
+         }
+
+<span class="nc bnc" id="L268" title="All 2 branches missed.">         if (source == butSquareRoot)</span>
+<span class="nc" id="L269">            writer(calc.calculateMono(Calculator.MonoOperatorModes.squareRoot, reader()));</span>
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">         if (source == butOneDividedBy)</span>
+<span class="nc" id="L272">            writer(calc.calculateMono(Calculator.MonoOperatorModes.oneDividedBy, reader()));</span>
+
+<span class="nc bnc" id="L274" title="All 2 branches missed.">         if (source == butCos)</span>
+<span class="nc" id="L275">            writer(calc.calculateMono(Calculator.MonoOperatorModes.cos, reader()));</span>
+
+<span class="nc bnc" id="L277" title="All 2 branches missed.">         if (source == butSin)</span>
+<span class="nc" id="L278">            writer(calc.calculateMono(Calculator.MonoOperatorModes.sin, reader()));</span>
+
+<span class="nc bnc" id="L280" title="All 2 branches missed.">         if (source == butTan)</span>
+<span class="nc" id="L281">            writer(calc.calculateMono(Calculator.MonoOperatorModes.tan, reader()));</span>
+
+<span class="nc bnc" id="L283" title="All 2 branches missed.">         if (source == butlog)</span>
+<span class="nc" id="L284">            writer(calc.calculateMono(Calculator.MonoOperatorModes.log, reader()));</span>
+
+<span class="nc bnc" id="L286" title="All 2 branches missed.">         if (source == butrate)</span>
+<span class="nc" id="L287">            writer(calc.calculateMono(Calculator.MonoOperatorModes.rate, reader()));</span>
+
+<span class="nc bnc" id="L289" title="All 2 branches missed.">         if (source == butabs)</span>
+<span class="nc" id="L290">            writer(calc.calculateMono(Calculator.MonoOperatorModes.abs, reader()));</span>
+
+<span class="nc bnc" id="L292" title="All 2 branches missed.">         if (source == butEqual)</span>
+<span class="nc" id="L293">            writer(calc.calculateEqual(reader()));</span>
+
+<span class="nc bnc" id="L295" title="All 2 branches missed.">         if (source == butCancel)</span>
+<span class="nc" id="L296">            writer(calc.reset());</span>
+
+<span class="nc bnc" id="L298" title="All 2 branches missed.">         if (source == butBinary)</span>
+<span class="nc" id="L299">            parsetoBinary();</span>
+      }
+
+<span class="nc" id="L302">      text.selectAll();</span>
+<span class="nc" id="L303">   }</span>
+   
+   private void parsetoBinary() {
+      try {
+<span class="nc" id="L307">         text.setText(&quot;&quot; + Long.toBinaryString(Long.parseLong(text.getText())));</span>
+<span class="nc" id="L308">      } catch (NumberFormatException ex) {</span>
+<span class="nc" id="L309">         System.err.println(&quot;Error while parse to binary.&quot; + ex.toString());</span>
+<span class="nc" id="L310">      }</span>
+<span class="nc" id="L311">   }</span>
+   
+   public Double reader() {
+      Double num;
+      String str;
+<span class="nc" id="L316">      str = text.getText();</span>
+<span class="nc" id="L317">      num = Double.valueOf(str);</span>
+      
+<span class="nc" id="L319">      return num;</span>
+   }
+   
+   public void writer(final Double num) {
+<span class="nc bnc" id="L323" title="All 2 branches missed.">      if (Double.isNaN(num)) {</span>
+<span class="nc" id="L324">         text.setText(&quot;&quot;);</span>
+      } else {
+<span class="nc" id="L326">         text.setText(Double.toString(num));</span>
+      }
+<span class="nc" id="L328">   }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
